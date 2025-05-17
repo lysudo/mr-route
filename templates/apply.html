@@ -1,0 +1,9 @@
+
+{% if success %}
+        <h3>applied routes:</h3>
+        {% for prefix in prefixes %}
+            <p>{{ prefix }}</p>
+        {% endfor %}
+    {% else %}
+        <p>something wrong happened</p>
+    {% endif %}
