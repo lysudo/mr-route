@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} games routes {% endblock %}
+{% block content %}
+<form hx-post="/apply" hx-target="#result" hx-swap="innerHTML">
+    <label>Select Game:
+    <select name="asn">
+        {% for name, asn in games.items() %}
+        <option value="{{ asn }}">{{ name }}</option>
+        {% endfor %}
+    </select>
+    </label><br><br>
+
+    <label>Select Gateway:
+    <select name="gateway">
+        {% for interface in interfaces %}
+        <option value="{{ interface.gateway }}">{{ interface.name }}</option>
+        {% endfor %}
+    </select>
+    </label><br><br>
+
+    <button type="submit">Apply Routes</button>
+</form>
+
+<div id="result"></div>
+{% endblock %}
