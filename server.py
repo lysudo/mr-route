@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from routes import list_interfaces, get_game_prefixes, apply_routes
+from dns import add_dns_entry
 
 app = Flask(__name__)
 
@@ -24,4 +25,8 @@ def apply():
     return render_template("apply.html", success=success, prefixes=prefixes)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    try:
+        add_dns_entry("routes.local")
+        app.run(debug=True, port=8888)
+    except PermissionError:
+        raise RuntimeError("Permission denied. Run this script as admin/root.")
